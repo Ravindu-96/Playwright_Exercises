@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { LoginPage } from '../pageobjects/login-page';
+import { LoginPage } from '../pageobjects/1-login-page';
 
 // This test suite contains a series of tests that validate the login flow of the application
 test.describe('Login Page Validation', () => {
