@@ -1,14 +1,15 @@
 import { test, expect } from '@playwright/test';
+import { TablePage } from '../pageobjects/5-table-extraction-page';
 
 test.describe('Table Data Extraction', async () => {
-    let table;
     let tableRows;
     let tabelRowCount;
+    let tablePage;
 
     test.beforeEach(async ({ page }) => {
-        await page.goto('https://the-internet.herokuapp.com/tables');
-        table = page.locator('#table1');
-        tableRows = table.locator('tbody tr');
+        tablePage = new TablePage(page);
+        await tablePage.gotoPage();
+        tableRows = tablePage.tableRows;
         tabelRowCount = await tableRows.count();
     });
 
@@ -19,18 +20,18 @@ test.describe('Table Data Extraction', async () => {
 
     // Print number of table rows
     test("Print number of table rows", async () => {
-        console.log("Number of table rows - ", await tableRows.count())
+        console.log("Number of table rows - ", tabelRowCount);
     })
 
-    // Print row and column number for 'jdoe@hotmail.com'
-    test("Print row and column number for 'jdoe@hotmail.com'", async () => {
+    // Print row and column number for Search string
+    test("Print row and column number for Search string", async () => {
         for (let i = 0; i < tabelRowCount; i++) {
             const cells = tableRows.nth(i).locator('td');
             const cellCount = await cells.count();
             for (let j = 0; j < cellCount; j++) {
                 const cellText = await cells.nth(j).textContent();
-                if (cellText == 'jdoe@hotmail.com') {
-                    console.log("Found 'jdoe@hotmail.com at", " Row " + (i + 1) + " Column " + (j + 1));
+                if (cellText == tablePage.searchInput) {
+                    console.log("Found ", TablePage.searchInput, " at Row " + (i + 1) + " Column " + (j + 1));
                 }
             }
         }
