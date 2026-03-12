@@ -16,30 +16,31 @@ test.describe('OTP Verification', () => {
         mailPage = new MailinatorPage(page2);
     })
 
-    test('Pages loads correctly', async () => {
+    test('OTP Verification Flow via UI', async () => {
+        // Go to the email page
         await mailPage.gotoPage();
         await expect(mailPage.inboxField).toBeVisible();
-        await mailPage.inboxField.fill('rav123');
-        await mailPage.inboxEnterButton.click();
+        await mailPage.createTempMail(otpPage.tempMail);
 
+        // Go to the OTP page
         await otpPage.gotoPage();
         await expect(otpPage.emailInput).toBeVisible();
-        await otpPage.emailInput.fill('rav123@mailinator.com');
-        await otpPage.otpSendButton.click();
+        await otpPage.sendOtp(otpPage.emailAcc);
 
-        const cell = mailPage.page.locator('td:has-text("Just Now")').first();
-        const row = cell.locator('..');
-        await row.click();
+        // Find lastly revieved email and open it
+        await mailPage.openMail();
 
-        const mailBodyLocator = mailPage.page.frameLocator('#html_msg_body').locator('body');
-        await expect(mailBodyLocator).toBeVisible();
+        // Extract recevied email body
+        const mailBodyLocator = mailPage.mailBody;
+        await expect(mailPage.mailBody).toBeVisible();
         const mailBody = await mailBodyLocator.textContent();
 
+        // Extract OTP code
         const otpCode = mailBody.match(/\d{6}/)?.[0];
 
-        await otpPage.otpInput.fill(otpCode);
-        await otpPage.otpVerifyButton.click();
-        await expect(otpPage.page.locator("b:has-text('You logged into a secure area!')")).toBeVisible();
+        // Enter OTP code in OTP page and verify
+        await otpPage.verifyOtp(otpCode);
+        await expect(otpPage.successMsg).toBeVisible();
 
     });
 })
