@@ -1,8 +1,8 @@
 class TablePage {
     constructor(page) {
+        this.page = page;
         this.url = "https://the-internet.herokuapp.com/tables";
         this.searchInput = "jdoe@hotmail.com";
-        this.page = page;
         this.table = page.locator('#table1');
         this.tableRows = this.table.locator('tbody tr');
     }

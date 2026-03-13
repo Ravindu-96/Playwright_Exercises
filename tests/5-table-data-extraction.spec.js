@@ -31,7 +31,7 @@ test.describe('Table Data Extraction', async () => {
             for (let j = 0; j < cellCount; j++) {
                 const cellText = await cells.nth(j).textContent();
                 if (cellText == tablePage.searchInput) {
-                    console.log("Found ", TablePage.searchInput, " at Row " + (i + 1) + " Column " + (j + 1));
+                    console.log("Found ", tablePage.searchInput, " at Row " + (i + 1) + " Column " + (j + 1));
                 }
             }
         }

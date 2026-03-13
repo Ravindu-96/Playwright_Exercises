@@ -1,7 +1,7 @@
 class LoginPage {
     constructor(page) {
-        this.url = "https://www.saucedemo.com/";
         this.page = page;
+        this.url = "https://www.saucedemo.com/";
         this.usernameInput = page.locator('#user-name');
         this.passwordInput = page.locator('#password');
         this.loginButton = page.locator('.submit-button');

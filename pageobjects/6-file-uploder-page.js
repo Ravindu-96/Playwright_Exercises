@@ -2,11 +2,12 @@ class FileUploaderPage {
     constructor(page) {
         this.page = page
         this.url = "https://the-internet.herokuapp.com/upload"
-        this.filePath = 'test-files/upload-test.txt'
-        this.fileName = 'upload-test.txt'
         this.chooseFile = page.locator('#file-upload')
         this.uploadbtn = page.locator('#file-submit')
         this.fileText = page.locator('#uploaded-files')
+        
+        this.filePath = 'test-files/upload-test.txt'
+        this.fileName = 'upload-test.txt'
     }
 
     async gotoPage() {

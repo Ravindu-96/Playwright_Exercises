@@ -1,7 +1,7 @@
 class DropdownPage {
     constructor(page) {
-        this.url = "https://the-internet.herokuapp.com/dropdown";
         this.page = page;
+        this.url = "https://the-internet.herokuapp.com/dropdown";
         this.heading = page.locator('h3');
         this.dropdown = page.locator('select#dropdown');
     }

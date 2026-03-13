@@ -1,7 +1,7 @@
 class JsAlertPage {
     constructor(page) {
-        this.url = "https://the-internet.herokuapp.com/javascript_alerts";
         this.page = page;
+        this.url = "https://the-internet.herokuapp.com/javascript_alerts";
         this.jsAlertButton = page.locator('button:has-text("Click for JS Alert")');
         this.jsConfirmButton = page.locator('button:has-text("Click for JS Confirm")');
         this.jsPromptButton = page.locator('button:has-text("Click for JS Prompt")');
