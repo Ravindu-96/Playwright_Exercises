@@ -25,6 +25,7 @@ export default defineConfig({
 
   // Action and Navigation Timeouts
   use: {
+    baseURL: 'https://the-internet.herokuapp.com',
     actionTimeout: 10 * 1000,     // 10 seconds for actions like click, type
     navigationTimeout: 15 * 1000, // 15 seconds for page.goto(), page.waitForNavigation()
     trace: 'on-first-retry',
