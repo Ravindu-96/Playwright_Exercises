@@ -1,0 +1,3 @@
+This is a demonstration file for the web-file-transfer skill.
+It shows how the skill can upload files to web forms.
+Created on: March 16, 2026
