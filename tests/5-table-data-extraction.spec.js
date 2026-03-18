@@ -37,6 +37,16 @@ test.describe('Table Data Extraction', async () => {
         }
     })
 
+    test("Print row and column number for Search string -- Using X path", async () => {
+        const row =
+            (await tablePage.page.locator(`//table[@id="table1"]/tbody//td[normalize-space(.)="${tablePage.searchInput}"]/parent::tr/preceding-sibling::tr`).count()) + 1;
+        const col =
+            (await tablePage.page.locator(`//table[@id="table1"]/tbody//td[normalize-space(.)="${tablePage.searchInput}"]/preceding-sibling::td`).count()) + 1;
+
+        console.log("Found ", tablePage.searchInput, " at Row " + row + " Column " + col);
+
+    })
+
     // Print all cell data
     test("Print all cell data", async () => {
         console.log("All cell data - ");
