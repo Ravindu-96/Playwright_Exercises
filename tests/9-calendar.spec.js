@@ -32,3 +32,48 @@ test.describe('Calendar Automation Flow', () => {
         await expect(calendarPage.outputDate).toHaveText(calendarPage.date);
     })
 })
+
+test.only("UI Date Picker", async ({ page }) => {
+    const dob = {
+        day: '15',
+        month: 'May',
+        year: '2025'
+    }
+
+    const monthToNumber = {
+        January: '01',
+        February: '02',
+        March: '03',
+        April: '04',
+        May: '05',
+        June: '06',
+        July: '07',
+        August: '08',
+        September: '09',
+        October: '10',
+        November: '11',
+        December: '12',
+    };
+    const expectedValue = `${monthToNumber[dob.month]}/${dob.day.padStart(2, '0')}/${dob.year}`;
+
+    await page.goto('https://jqueryui.com/datepicker/');
+    const frame = page.frameLocator("[src*='/resources/']");
+    const datepicker = frame.locator('#datepicker');
+    await datepicker.click();
+
+    const cal_month = frame.locator('.ui-datepicker-month');
+    const cal_year = frame.locator('.ui-datepicker-year');
+
+    while (true) {
+        const month = await cal_month.textContent();
+        const year = await cal_year.textContent();
+        if (month === dob.month && year === dob.year) {
+            await frame.locator("tbody a").filter({ hasText: dob.day }).click();
+            break;
+        }
+        await frame.locator('[title="Prev"]').click();
+    }
+
+    await expect(datepicker).toHaveValue(expectedValue);
+
+})
