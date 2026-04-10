@@ -33,7 +33,7 @@ test.describe('Calendar Automation Flow', () => {
     })
 })
 
-test.only("UI Date Picker", async ({ page }) => {
+test("UI Date Picker", async ({ page }) => {
     const dob = {
         day: '15',
         month: 'May',
